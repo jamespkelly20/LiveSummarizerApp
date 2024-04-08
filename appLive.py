@@ -61,8 +61,8 @@ with st.container():
                 #     st.text("Logged in successfully!")
 
         if st.session_state.login_successful:
-            email1 = st.text_input("Enter first Email:")
-            email2 = st.text_input("Enter second Email:")
+            email1 = st.text_input("Enter the Sender's Email Address:")
+            email2 = st.text_input("Enter the Recipient's Email Address:")
             startDate = st.date_input("Enter Start Date:", min_value=pd.to_datetime('2000-01-01'))
             endDate = st.date_input("Enter End Date:", min_value=pd.to_datetime('2000-01-01'))
             totalWordsInOutput = st.number_input("Enter Number Words in Output:", min_value=20, value=250, step=25)
