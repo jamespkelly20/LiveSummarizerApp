@@ -12,15 +12,10 @@ import re
     # May need to enable less secure apps in order to login using IMAP.\n",
     # To do this, go to the Security settings in your Gmail account and enable the \"Allow less secure apps\" option.\n",
     #imap_server = imaplib.IMAP4_SSL('imap.gmail.com')\n",
-    #imap_server.login('jamespkelly20@gmail.com', 'ninh yipq ephn hxas')\n",
     ## IN order to get this security key password you ahve to go into gmail settings and allow IMAP settings and then create\n",
     ## an app password. This will generate a 16 digit key for you to use. \n",
 
     # Follow the instructions at https://streamlit.io/ to install streamlit locally. (pip install streamlit)
-    # goodluckjonathan4eva@gmail.com = qbqp uzbt hmdy aoag
-    # johnbanda4eva@gmail.com
-    ## jamespkelly20@gmail.com = vtch nnyy itey bxsf
-    # lukeakelly1@gmail.com ygww lxnl jtdu kfqj
 
 
 #sender_email = richard.shapiro@enron.com jeff.dasovich@enron.com
