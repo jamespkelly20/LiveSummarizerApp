@@ -1,2 +1,3 @@
 beautifulsoup4
 openai==0.28
+html2text
