@@ -18,6 +18,10 @@ def fetchRequiredEmails(emailAddress, password, sender, receiver, start_date, en
         return None
 
     try:
+        # We need to increment the end date since our search query searches since the start date to before the end date.
+        # This means it is up to the end date but not including it. We want to include it. Hence increment end_date by 1.
+        end_date = end_date + timedelta(days=1)  
+        print("END DATE = ", end_date)
         # Select Inbox folder
         imap_server = imaplib.IMAP4_SSL('imap.gmail.com')
         imap_server.login(emailAddress, password)
@@ -32,9 +36,7 @@ def fetchRequiredEmails(emailAddress, password, sender, receiver, start_date, en
                 f'(FROM "{receiver}")', #john (working)
                 f'(TO "{sender}")',# good luck (working)
                 f'(SINCE "{start_date.strftime("%d-%b-%Y")}")',
-                # Add one day to end_date to include emails from end_date. 'BEFORE' is not inclusive of the end date.
-                f'(BEFORE "{(end_date + timedelta(days=1)).strftime("%d-%b-%Y")}")'
-                #f'(BEFORE "{end_date.strftime("%d-%b-%Y")}")'
+                f'(BEFORE "{end_date.strftime("%d-%b-%Y")}")'
             ]
             search_query = ' '.join(search_criteria_sender)
             result_inbox, data_inbox = imap_server.search(None, search_query)
@@ -48,9 +50,7 @@ def fetchRequiredEmails(emailAddress, password, sender, receiver, start_date, en
                 f'(FROM "{sender}")', # john (not working)
                 f'(TO "{receiver}")', # goodluck
                 f'(SINCE "{start_date.strftime("%d-%b-%Y")}")',
-                # Add one day to end_date to include emails from end_date. 'BEFORE' is not inclusive of the end date.
-                f'(BEFORE "{(end_date + timedelta(days=1)).strftime("%d-%b-%Y")}")'
-                # f'(BEFORE "{end_date.strftime("%d-%b-%Y")}")'
+                f'(BEFORE "{end_date.strftime("%d-%b-%Y")}")'
             ]     
             search_query = ' '.join(search_criteria_receiver)
             result_inbox, data_inbox = imap_server.search(None, search_query)
@@ -96,9 +96,7 @@ def fetchRequiredEmails(emailAddress, password, sender, receiver, start_date, en
                 # f'(HEADER "FROM" "{sender}")',#goodluck
                 # f'(HEADER "TO" "{receiver}")',# john
                 f'(SINCE "{start_date.strftime("%d-%b-%Y")}")',
-                # Add one day to end_date to include emails from end_date. 'BEFORE' is not inclusive of the end date.
-                f'(BEFORE "{(end_date + timedelta(days=1)).strftime("%d-%b-%Y")}")'
-                # f'(BEFORE "{end_date.strftime("%d-%b-%Y")}")'
+                f'(BEFORE "{end_date.strftime("%d-%b-%Y")}")'
             ]
             search_query = ' '.join(search_criteria1)
             result_sent, data_sent = imap_server.search(None, search_query)
@@ -111,9 +109,7 @@ def fetchRequiredEmails(emailAddress, password, sender, receiver, start_date, en
                 f'(FROM "{receiver}")', 
                 f'(TO "{sender}")', 
                 f'(SINCE "{start_date.strftime("%d-%b-%Y")}")',
-                # Add one day to end_date to include emails from end_date. 'BEFORE' is not inclusive of the end date.
-                f'(BEFORE "{(end_date + timedelta(days=1)).strftime("%d-%b-%Y")}")'
-                # f'(BEFORE "{end_date.strftime("%d-%b-%Y")}")'
+                f'(BEFORE "{end_date.strftime("%d-%b-%Y")}")'
             ]
             search_query = ' '.join(search_criteria2)
             result_sent, data_sent = imap_server.search(None, search_query)
@@ -167,7 +163,6 @@ def fetchRequiredEmails(emailAddress, password, sender, receiver, start_date, en
         print("HELLOOOOOOOO")
         print(df['From'])
         print(df['To'])
-
         return df
     finally:
         # Always close the connection after use

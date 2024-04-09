@@ -11,6 +11,7 @@ import html2text
 import urllib
 
 import html
+from datetime import timedelta
 
 #pip install beautifulsoup4
 #pip install openai
@@ -77,6 +78,8 @@ def extract_chunks(text, words_per_summary):
 
 # Function to get emails and summarize
 def get_emails_and_summarize(df, sender, recipient, start_date, end_date, total_words_in_output):
+    end_date = end_date + timedelta(days=1)  
+    print("end_date in summarization_function = ", end_date)
     words_per_chunk = calculate_words_per_chunk()
     # Step 1: Filter emails based on sender, recipient, and date range
     df['Date'] = pd.to_datetime(df['Date'], utc=True, errors='coerce') 

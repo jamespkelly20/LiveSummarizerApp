@@ -88,6 +88,12 @@ with st.container():
                             st.warning("Error occurred during summarization. \n\nEither one or more email addresses have not been found, or there is no existing emails!")
                         except openai.error.InvalidRequestError as e:
                             st.warning(f"The total words in the emails exceeded the models capacity. \nPlease reduce the input and try again")
+                        except openai.error.RateLimitError:
+                            # This block catches the RateLimitError specifically
+                            st.error("OPENAI has reached its limit. Try again soon or shorten the amount of emails you want summarized.")
+                        except Exception as e:
+                            # Generic exception handler for any other exceptions
+                            st.error(f"An unexpected error occurred: {e}")
                     else:
                         st.warning("No emails found for the specified criteria.")
 
