@@ -65,7 +65,7 @@ with st.container():
             email2 = st.text_input("Enter the Recipient's Email Address:")
             startDate = st.date_input("Enter Start Date:", min_value=pd.to_datetime('2000-01-01'))
             endDate = st.date_input("Enter End Date:", min_value=pd.to_datetime('2000-01-01'))
-            totalWordsInOutput = st.number_input("Enter Number Words in Output:", min_value=20, value=250, step=25)
+            totalWordsInOutput = st.number_input("Enter Number of Words in Output:", min_value=20, value=250, step=25)
 
             # Button to trigger summarization
             if st.button("Summarize Live Emails"):
